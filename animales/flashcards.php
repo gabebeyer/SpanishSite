@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 
-
+<?php require("../navbar.php"); ?>
 
 <meta charset="utf-8" />
 <script src="getimages.php"></script>
@@ -47,6 +47,7 @@ function getDocWidth() {
         Math.max(D.body.clientWidth, D.documentElement.clientWidth)
     );
 };
+
 //this function flips the card, checks for the right answer delivers the response
 function flip(loc){
     for(t in tiles){
@@ -60,7 +61,7 @@ function flip(loc){
 function Tile(id,image,label){
     this.image=image;
     this.label=image.label;
-    this.faceUp=50; //the counter for flipping
+    this.faceUp=0; //the counter for flipping
     this.context=context;    
     this.id=id; //used for placement
     this.size  = [1.8*itemSize,itemSize*.8]; //creates the elementSize based on the window size
@@ -82,10 +83,7 @@ function Tile(id,image,label){
 };
 Tile.prototype.flip = function(){ //flip tile
     if(this.faceUp > 0) this.faceUp=0; else this.faceUp=20;
-    if (this.label == matchLabel){
-        alert("¡Estás Correct@! Es " + this.label)
-        window.location.reload();
-    }
+
 };
 Tile.prototype.Contains = function (loc){
     if(this.x <= loc[0] && loc[0] <= this.x+this.size[0]){
@@ -122,7 +120,8 @@ function draw(){
 	context.fillRect(0,0,canvas.width,canvas.height);
 	context.drawImage(matchImage,2,2,canvas.width-4,canvas.height-4);
 	index = 0;
-	while(index < tiles.length){
+	
+    while(index < tiles.length){
         	tiles[index].Paint();
 		index++;
     	}
