@@ -8,9 +8,7 @@
 
 <meta charset="utf-8" />
 <script src="getimages.php"></script>
-
 <script>
-
 // get the list of image names from the images folder
 var pics=galleryarray; 
 var numTiles = 16; //tiles per slide

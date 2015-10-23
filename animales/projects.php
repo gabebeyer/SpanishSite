@@ -8,7 +8,7 @@
 a{text-decoration:none;
  color: #654321;
 }
-.directory {
+.directory {	
 color:white;
 background:#AAAAAA;
 border: solid; border-width: 1px; border-color:pink; 
