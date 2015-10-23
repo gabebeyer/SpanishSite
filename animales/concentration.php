@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <script src="./getimages.php"></script>
+
 <script>
 // get the list of image names from the images folder
-
 var pics=galleryarray; 
 var numTiles = 8; //8 tiles per screen
 var images = new Array(); //hold the images
@@ -115,6 +115,10 @@ function Tile(id,image,label){
 Tile.prototype.flip = function(){ //flip tile
 	//if(this.faceUp > 0) this.faceUp=0; else this.faceUp=20;
 	this.selected = this.selected ? false : true;
+    if (this.label == matchLabel){
+        alert("¡Estás Correct@! Es " + this.label)
+        window.location.reload();
+    }
 };
 
 Tile.prototype.Contains = function (loc){

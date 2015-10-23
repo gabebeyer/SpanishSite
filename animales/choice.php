@@ -77,6 +77,10 @@ function Tile(id,image,label){
 };
 Tile.prototype.flip = function(){ //flip tile
 	if(this.faceUp > 0) this.faceUp=0; else this.faceUp=20;
+        if (this.label == matchLabel){
+        alert("¡Estás Correct@! Es " + this.label)
+        window.location.reload();
+    }
 };
 
 Tile.prototype.Contains = function (loc){

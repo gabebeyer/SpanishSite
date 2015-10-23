@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+
 <meta charset="utf-8" />
-<script src="./getimages.php"></script>
+<script src="getimages.php"></script>
 
 <script>
-
-
-
 
 // get the list of image names from the images folder
 var pics=galleryarray; 
@@ -81,9 +81,12 @@ function Tile(id,image,label){
     this.color  = '#'+(Math.random()*0xFFFFFF<<0).toString(16); //random color
 };
 Tile.prototype.flip = function(){ //flip tile
-	if(this.faceUp > 0) this.faceUp=0; else this.faceUp=20;
+    if(this.faceUp > 0) this.faceUp=0; else this.faceUp=20;
+    if (this.label == matchLabel){
+        alert("¡Estás Correct@! Es " + this.label)
+        window.location.reload();
+    }
 };
-
 Tile.prototype.Contains = function (loc){
     if(this.x <= loc[0] && loc[0] <= this.x+this.size[0]){
         if(this.y <= loc[1] && loc[1] <= this.y+this.size[1]){
@@ -173,7 +176,6 @@ function init(){
 
  </script>  
   </head>
-
   <body onLoad="init();">
   <div id="space">
  <canvas id="myCanvas"></canvas> 
