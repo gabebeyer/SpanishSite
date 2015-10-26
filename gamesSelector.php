@@ -32,7 +32,7 @@
 
   <div class="col-xs-6 col-md-3">
      <div class="thumbnail">
-        <img src="http://www.soundaudiosystems.com/images/apps/classroom.jpg" alt="...">
+        <img src="http://previewcf.turbosquid.com/Preview/2014/07/11__02_10_02/Classroom_1.jpgabf0560d-a851-42a0-8458-8bc4f118bbaeRes200.jpg" alt="...">
         <div class="caption">
           <h3>La sala de clase</h3>
           <p>It is important to know the classroom objects.</p>
