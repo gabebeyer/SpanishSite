@@ -17,7 +17,6 @@
         <input type="text" id="inputUsername" class="form-control" placeholder="username" name = 'username' required autofocus>
         <label for="inputPassword" class="sr-only">password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="password" name = 'password' required>
-
        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
