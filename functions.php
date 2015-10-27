@@ -19,6 +19,7 @@ function connect($config){
 	} catch (exeption $e) {
 		return false;
 	}
+}
 
 //Returns all from table. 
 function get($tableName, $conn)

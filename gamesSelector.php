@@ -20,10 +20,10 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a href="/animales/flashcards.php">Flash Cards</a></li>
-              <li><a href="/animales/choice.php">Multiple Choice</a></li>
-              <li><a href="/animales/elimination.php">Elimination</a></li>
-              <li><a href="/animales/concentration.php">Matching</a></li>
+              <li><a href="animales/flashcards.php">Flash Cards</a></li>
+              <li><a href="animales/choice.php">Multiple Choice</a></li>
+              <li><a href="animales/elimination.php">Elimination</a></li>
+              <li><a href="animales/concentration.php">Matching</a></li>
             </ul>
         </div>
         </div>
