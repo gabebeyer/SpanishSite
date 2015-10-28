@@ -1,4 +1,5 @@
-  <!DOCTYPE html>
+<?php session_start(); ?>
+ <!DOCTYPE html>
 <html>
 <head>
 <?php require("html_imports.php"); ?>

@@ -4,7 +4,7 @@
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 
-//	session_start();
+	session_start();
 
 	require 'functions.php';
 
@@ -30,7 +30,8 @@
 	}
 
 	if ($username == $row[0]['username'] && $password == $row[0][$password]) {
-			echo "User Logged in";
+			$_SESSION['CurrentUser'] = $username;
+			header('Location: ./index.php');    
 		}else{
 			echo "
             <script type=\"text/javascript\">
@@ -39,6 +40,8 @@
             </script>
         ";
 	}
+
+
 
 
 
