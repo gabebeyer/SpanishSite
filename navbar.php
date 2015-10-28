@@ -14,7 +14,7 @@ require("html_imports.php");
 	       
 	        <li><a href="http://localhost:8888/SpanishSite/logout.php">Log Out</a></li>
 	       
-	        <li><a href="#">Sign Up</a></li>
+	        <li><a href="http://localhost:8888/SpanishSite/register_html.php">Sign Up</a></li>
 	      
 	      </ul>
 	    

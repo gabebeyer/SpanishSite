@@ -1,10 +1,11 @@
-<?php 
-
+<?php
+	
+	session_start();
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 
-	session_start();
+
 
 	require 'functions.php';
 
@@ -29,7 +30,8 @@
         die();
 	}
 
-	if ($username == $row[0]['username'] && $password == $row[0][$password]) {
+
+	if ($username == $row[0]['username'] && $password == $row[0]['password']) {
 			$_SESSION['CurrentUser'] = $username;
 			header('Location: ./index.php');    
 		}else{
@@ -37,13 +39,8 @@
             <script type=\"text/javascript\">
            		alert('wrong username and/or password')    
           	 	window.location = './login_html.php'
-            </script>
-        ";
+            </script>";
 	}
-
-
-
-
 
 
 ?>

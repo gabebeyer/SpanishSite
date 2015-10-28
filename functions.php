@@ -25,13 +25,10 @@ function connect($config){
 function get($tableName, $conn)
 {
 	try {
-		
 		$results = $conn->query("SELECT * FROM $tableName");
-
 		return ($results->rowCount() > 0)
 			? $results
 			: false;
-
 	} catch (Exception $e) {
 		return false;
 	}
@@ -45,4 +42,25 @@ function query($query, $bindings, $conn)
 	$results =  $stmt->fetchAll();
 	return $results ? $results : false;
 }
+
+function insertquery($query, $bindings, $conn)
+{
+	$stmt = $conn->prepare($query);
+	$stmt->execute($bindings);
+
+	try {
+		$stmt->fetchAll();
+		$results =  $stmt->fetchAll();
+	} catch (Exception $e) {
+	}
+
+	if (isset($results)) {
+		return $results ? $results : false;
+	}	
+}
+
+
+
+
+
 
