@@ -19,6 +19,9 @@ var fontSize; //derived from window width
 var context; 
 var matchImage; //image used for the background - the question
 var matchLabel; //the name of the background pic
+var audioElement = document.createElement('audio');  //makes a beep on wrong answer
+audioElement.setAttribute('src', './beep.wav');
+audioElement.load();
 
 //used to shuffle the array of image names. i want to randomly create each slide.
 shuffle = function(o){ //v1.0
@@ -88,8 +91,8 @@ function Tile(id,image,label){
 };
 Tile.prototype.flip = function(){ //flip tile
     if(this.faceUp > 0) this.faceUp=0; else this.faceUp=20;
-
 };
+
 Tile.prototype.Contains = function (loc){
     if(this.x <= loc[0] && loc[0] <= this.x+this.size[0]){
         if(this.y <= loc[1] && loc[1] <= this.y+this.size[1]){
