@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,9 +54,34 @@ function flip(loc){
         // if it is not flipped, flip it and set the reflip timer
         tiles[t].flip(); 
         if (tiles[t].label == matchLabel){ //and it's a match
-            setTimeout("window.location.reload(false)",500); //reload the page  
+            //reload the page  
+                $.ajax({
+                    url:'http://localhost:8888/SpanishSite/score.php',
+                    data: { "word": matchLabel, "correct": 1},
+                    success: function(data)
+                    {
+                        console.log("ajax success");
+                    },
+                    error: function()
+                    {
+                        console.log("ajax fail");
+                    }
+                });
+            setTimeout("window.location.reload(false)",500); 
         }else{
             audioElement.play(); //otherwise, 
+                $.ajax({
+                    url:'http://localhost:8888/SpanishSite/score.php',
+                    data: { "word": matchLabel, "correct": 0},
+                    success: function(data)
+                    {
+                        console.log("ajax success");
+                    },
+                    error: function()
+                    {
+                        console.log("ajax fail");
+                    }
+                });
         }             
         }    
     }
