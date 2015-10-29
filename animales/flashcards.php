@@ -72,7 +72,7 @@ function flip(loc){
             audioElement.play(); //otherwise, 
                 $.ajax({
                     url:'http://localhost:8888/SpanishSite/score.php',
-                    data: { "word": matchLabel, "correct": 0},
+                    data: { "word": tiles[t].label, "correct": 0},
                     success: function(data)
                     {
                         console.log("ajax success");
