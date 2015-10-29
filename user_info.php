@@ -12,29 +12,28 @@
 			   array('username' => $_SESSION['CurrentUser']),
 			   $conn);	
 
-	var_dump($UserRow);
-
 	echo "<br>";
 
 	$id = $UserRow[0]["id"];
-
 	echo "ID --> ".$id;
 
 	$scores = query("SELECT * FROM scores WHERE userid = :id",
 			  array('id' => $id),
 			  $conn);	
-	echo "<br>";
-	var_dump($scores);
+
+
 
 
 	$totalScore = 0;
-	foreach ($scores as $score) {
-		$correct = intval($score["correct"]);
-		$totalScore = $totalScore + $correct;
+	
+	if ($scores) {
+		foreach ($scores as $score) {
+			$correct = intval($score["correct"]);
+			$totalScore = $totalScore + $correct;
+		}	
 	}
 
 	echo "<br>";
-
 	echo "TOTAL SCORE IS " . $totalScore;
 
 ?>
