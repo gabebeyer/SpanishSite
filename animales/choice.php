@@ -75,10 +75,11 @@ function Tile(id,image,label){
     }
     this.color  = '#'+(Math.random()*0xFFFFFF<<0).toString(16); //random color
 };
+
 Tile.prototype.flip = function(){ //flip tile
 	if(this.faceUp > 0) this.faceUp=0; else this.faceUp=20;
         if (this.label == matchLabel){
-        alert("¡Estás Correct@! Es " + this.label)
+            alert("¡Estás Correct@! Es " + this.label)
         window.location.reload();
     }
 };
