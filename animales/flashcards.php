@@ -49,11 +49,18 @@ function getDocWidth() {
 //this function flips the card, checks for the right answer delivers the response
 function flip(loc){
     for(t in tiles){
-        if (tiles[t].Contains(loc)){ //if you click a tile        		
-		tiles[t].flip(); 		            
+        if (tiles[t].Contains(loc)){ //if you click a tile              
+        // if it is not flipped, flip it and set the reflip timer
+        tiles[t].flip(); 
+        if (tiles[t].label == matchLabel){ //and it's a match
+            setTimeout("window.location.reload(false)",500); //reload the page  
+        }else{
+            audioElement.play(); //otherwise, 
+        }             
         }    
     }
 };
+
 
 //the tile is a picture on one side and the name of the file on the other.
 function Tile(id,image,label){
