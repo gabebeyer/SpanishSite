@@ -6,6 +6,8 @@ require("html_imports.php");
 	  <div class="container-fluid">
 	  	<div style="padding:0 75px">
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	        <a class="navbar-brand" href="http://localhost:8888/SpanishSite/index.php">Home</a>
+
 	      <ul class="nav navbar-nav">
 	      	<!-- SUBJECT TO CHANGE-->
 	      	<!-- configured for MAMP -->
