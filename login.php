@@ -1,14 +1,14 @@
-<?php
-	
+<?php	
 	session_start();
+
+	//not for release
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 
-
-
 	require 'functions.php';
 
+	//db connect obj, in functions.php
 	$conn = connect($config);
 
 	$username = $_POST['username'];	
@@ -20,7 +20,7 @@
 		} catch (Exception $e) {
 			echo "Trouble connecting to database";
 		}
-	}else{	
+	}else{
 		echo "
             <script type=\"text/javascript\">
            		alert('please enter username and password')    
@@ -30,11 +30,13 @@
         die();
 	}
 
-
+	//By this point we know username and password are "valid" ie not NULL
+	//but even if we didnt, this step would filter out null entries
 	if ($username == $row[0]['username'] && $password == $row[0]['password']) {
 			$_SESSION['CurrentUser'] = $username;
 			header('Location: ./index.php');    
 		}else{
+
 			echo "
             <script type=\"text/javascript\">
            		alert('wrong username and/or password')    

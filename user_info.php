@@ -5,8 +5,8 @@
 
 	//no need to check if user is logged in, gets here from names link only (navbar)
 	//will error if no session available (they typed in the url)
-
 	echo $_SESSION['CurrentUser'];
+	
 
 	$UserRow = query("SELECT * FROM users WHERE username = :username",
 			   array('username' => $_SESSION['CurrentUser']),
@@ -20,8 +20,6 @@
 	$scores = query("SELECT * FROM scores WHERE userid = :id",
 			  array('id' => $id),
 			  $conn);	
-
-
 
 
 	$totalScore = 0;

@@ -34,6 +34,7 @@ function get($tableName, $conn)
 	}
 }
 
+//main func for db querys
 //pass sql query with bindings in array.
 function query($query, $bindings, $conn)
 {
@@ -43,6 +44,9 @@ function query($query, $bindings, $conn)
 	return $results ? $results : false;
 }
 
+//when using INSERT i use insertquery
+//lazy way of deeling with INSERT not returning anything
+//could be cleaned up
 function insertquery($query, $bindings, $conn)
 {
 	$stmt = $conn->prepare($query);

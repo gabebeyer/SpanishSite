@@ -1,5 +1,6 @@
 <?php 
-
+	
+	//pretty much the same prosses as login
 	
 	session_start();
 

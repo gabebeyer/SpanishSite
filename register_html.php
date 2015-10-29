@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Register</title>
 
 	<!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
