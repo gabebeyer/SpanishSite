@@ -1,9 +1,7 @@
+<?php require("../navbar.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<?php require("../navbar.php"); ?>
-
 <meta charset="utf-8" />
 <script src="getimages.php"></script>
 <script>

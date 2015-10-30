@@ -1,11 +1,6 @@
 <?php	
 	session_start();
 
-	//not for release
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
-
 	require 'functions.php';
 
 	//db connect obj, in functions.php
