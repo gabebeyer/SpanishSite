@@ -20,6 +20,7 @@
 	$scores = query("SELECT * FROM scores WHERE userid = :id",
 			  array('id' => $id),
 			  $conn);
+	
 	//list of ALL right/wrong words from last 2 weeks
 	$wrongWords = array();
 	$rightWords = array();
@@ -93,14 +94,28 @@
 					  <ul class="list-group">
 					    <?php 
 					    	$counter = 0;
-					    	foreach (knownWords($rightWords,$RIGHT_AMOUNT) as $word) {
-					    		if ($counter <= 5) {
-					    			echo "<li class='list-group-item'>$word</li>";	
-					    		}else{
-					    			die();
-					    		}
-								$counter += 1;
+					    	if (empty($rightWords)) {
+					    		echo "<li class='list-group-item'> Sorry you have no recent words </li>";
+					    	} else {
+								foreach (knownWords($rightWords,$RIGHT_AMOUNT) as $word) {
+					    			if ($counter <= 5) {
+					    			
+					    				$pieces = explode(" ", $word);
+									
+										$search_word = $pieces[1];
+
+					    				$link = "<a href='http://www.wordreference.com/es/translation.asp?tranword=$search_word'>$word</a>";
+					    		
+					    				echo "<li class='list-group-item'> $link </li>";	
+					    			}else{
+					    				die();
+					    			}
+									$counter += 1;
 							}
+					    	}
+					    	
+
+					    	
 					     ?>
 					  </ul>
 				</div>
@@ -114,13 +129,25 @@
 					  <ul class="list-group">
 					    <?php 
 					    	$counter = 0;
-					    	foreach (problemWords($wrongWords,$WRONG_AMOUNT) as $word) {
-					    		if ($counter < 5) {
-					    			echo "<li class='list-group-item'>$word</li>";	
-					    		}else{
-					    			die();
-					    		}
-								$counter += 1;
+
+					    	if (empty($wrongWords)){
+					    		echo "<li class='list-group-item'> Sorry you have no recent words </li>";
+					    	}else{
+						    	foreach (problemWords($wrongWords,$WRONG_AMOUNT) as $word) {
+						    		if ($counter < 5) {
+						    			
+						    			$pieces = explode(" ", $word);
+										
+										$search_word = $pieces[1];
+
+						    			$link = "<a href='http://www.wordreference.com/es/translation.asp?tranword=$search_word'>$word</a>";
+						    		
+						    			echo "<li class='list-group-item'> $link </li>";	
+						    		}else{
+						    			die();
+						    		}
+									$counter += 1;
+								}
 							}
 					     ?>
 					  </ul>
