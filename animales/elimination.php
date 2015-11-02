@@ -70,9 +70,34 @@ function flip(loc){
 		if (tiles[t].image.label == matchImage.label){ //and it's a match
 			tiles.splice(tiles.findIndex(tiles[t]),1);
 			matchImage=tiles[Math.floor(Math.random()*tiles.length)].image	
+                $.ajax({
+                    url:'http://localhost:8888/SpanishSite/score.php',
+                    data: { "word": matchLabel, "correct": 1},
+                    success: function(data)
+                    {
+                        console.log("ajax success");
+                    },
+                    error: function()
+                    {
+                        console.log("ajax fail");
+                    }
+                });
+
 		}else{
 			audioElement.play(); //otherwise, 
-		}           
+		      $.ajax({
+                    url:'http://localhost:8888/SpanishSite/score.php',
+                    data: { "word": matchLabel, "correct": 1},
+                    success: function(data)
+                    {
+                        console.log("ajax success");
+                    },
+                    error: function()
+                    {
+                        console.log("ajax fail");
+                    }
+                });
+        }           
         }    
     }
 };

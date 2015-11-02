@@ -1,3 +1,5 @@
+<?php require("../navbar.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +42,7 @@ function getDocHeight() {
         Math.max(D.body.clientHeight, D.documentElement.clientHeight)
     );
 };
+
 //i made a copy of it for the width.
 function getDocWidth() {
     var D = document;
@@ -49,6 +52,7 @@ function getDocWidth() {
         Math.max(D.body.clientWidth, D.documentElement.clientWidth)
     );
 };
+
 //found this function to find array element - need it for post elimination lookup
 Array.prototype.findIndex = function(value){
 	var ctr = "";
@@ -117,7 +121,33 @@ Tile.prototype.flip = function(){ //flip tile
 	this.selected = this.selected ? false : true;
     if (this.label == matchLabel){
         alert("¡Estás Correct@! Es " + this.label)
+         $.ajax({
+                    url:'http://localhost:8888/SpanishSite/score.php',
+                    data: { "word": matchLabel, "correct": 1},
+                    success: function(data)
+                    {
+                        console.log("ajax success");
+                    },
+                    error: function()
+                    {
+                        console.log("ajax fail");
+                    }
+                });
         window.location.reload();
+    }else{
+            audioElement.play(); //otherwise, 
+                $.ajax({
+                    url:'http://localhost:8888/SpanishSite/score.php',
+                    data: { "word": tiles[t].label, "correct": 0},
+                    success: function(data)
+                    {
+                        console.log("ajax success");
+                    },
+                    error: function()
+                    {
+                        console.log("ajax fail");
+                    }
+                });
     }
 };
 
@@ -229,9 +259,7 @@ function init(){
 
  </script>  
   </head>
-
   <body onLoad="init();">
-
   <div id="space">
  <canvas id="myCanvas"></canvas> 
 </div>

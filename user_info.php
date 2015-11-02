@@ -83,80 +83,75 @@
 	<title>User Pgae</title>
 	<?php require("navbar.php"); ?>
 </head>
-<body>
-	<div class="row">
-		<div style="padding:0 75px">
-			<div class="col-md-6">
-				<div class="panel panel-info">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading"> Words you know</div>
-				  <!-- List group -->
-					  <ul class="list-group">
-					    <?php 
-					    	$counter = 0;
-					    	if (empty($rightWords)) {
-					    		echo "<li class='list-group-item'> Sorry you have no recent words </li>";
-					    	} else {
-								foreach (knownWords($rightWords,$RIGHT_AMOUNT) as $word) {
-					    			if ($counter <= 5) {
-					    			
-					    				$pieces = explode(" ", $word);
-									
-										$search_word = $pieces[1];
+	<body>
+		<div class="row">
+			<div style="padding:0 75px">
+				<div class="col-md-6">
+					<div class="panel panel-info">
+					  <!-- Default panel contents -->
+					  <div class="panel-heading"> Words you know</div>
+					  <!-- List group -->
+						  <ul class="list-group">
+						    <?php 
+						    	$counter = 0;
+						    	if (empty($rightWords)) {
+						    		echo "<li class='list-group-item'> Sorry you have no recent words </li>";
+						    	} else {
+									foreach (knownWords($rightWords,$RIGHT_AMOUNT) as $word) {
+						    			if ($counter <= 5) {
+						    				
+						    				//michael bay of code rn
+						    				$pieces = explode(" ", $word);
+											$search_word = implode(" ",array_slice($pieces, 1));
+					
 
-					    				$link = "<a href='http://www.wordreference.com/es/translation.asp?tranword=$search_word'>$word</a>";
-					    		
-					    				echo "<li class='list-group-item'> $link </li>";	
-					    			}else{
-					    				die();
-					    			}
-									$counter += 1;
-							}
-					    	}
-					    	
-
-					    	
-					     ?>
-					  </ul>
-				</div>
-			</div>
-
-			<div class="col-md-6">
-				<div class="panel panel-danger">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading"> Words you Dont know</div>
-				  <!-- List group -->
-					  <ul class="list-group">
-					    <?php 
-					    	$counter = 0;
-
-					    	if (empty($wrongWords)){
-					    		echo "<li class='list-group-item'> Sorry you have no recent words </li>";
-					    	}else{
-						    	foreach (problemWords($wrongWords,$WRONG_AMOUNT) as $word) {
-						    		if ($counter < 5) {
-						    			
-						    			$pieces = explode(" ", $word);
-										
-										$search_word = $pieces[1];
-
-						    			$link = "<a href='http://www.wordreference.com/es/translation.asp?tranword=$search_word'>$word</a>";
+						    				$link = "<a href='http://www.wordreference.com/es/translation.asp?tranword=$search_word'>$word</a>";
 						    		
-						    			echo "<li class='list-group-item'> $link </li>";	
-						    		}else{
-						    			die();
-						    		}
-									$counter += 1;
+						    				echo "<li class='list-group-item'> $link </li>";	
+						    			}else{
+						    				die();
+						    			}
+										$counter += 1;
 								}
-							}
-					     ?>
-					  </ul>
+						    	}
+						     ?>
+						  </ul>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="panel panel-danger">
+					  <!-- Default panel contents -->
+					  <div class="panel-heading"> Words you Dont know</div>
+					  <!-- List group -->
+						  <ul class="list-group">
+						    <?php 
+						    	$counter = 0;
+						    	if (empty($wrongWords)){
+						    		echo "<li class='list-group-item'> Sorry you have no recent words </li>";
+						    	}else{
+							    	foreach (problemWords($wrongWords,$WRONG_AMOUNT) as $word) {
+							    		if ($counter < 5) {
+							    			
+							    			$pieces = explode(" ", $word);
+											$search_word = implode(" ",array_slice($pieces, 1));
+
+							    			$link = "<a href='http://www.wordreference.com/es/translation.asp?tranword=$search_word'>$word</a>";
+							    		
+							    			echo "<li class='list-group-item'> $link </li>";	
+							    		}else{
+							    			die();
+							    		}
+										$counter += 1;
+									}
+								}
+						     ?>
+						  </ul>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	
-</body>
+	</body>
 </html>
 
 
