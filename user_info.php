@@ -7,16 +7,13 @@
 	//in order for you to "know" the word
 	$WRONG_AMOUNT = 3;
 	$RIGHT_AMOUNT = 3;
-
 	//no need to check if user is logged in, gets here from names link only (navbar)
 	//will error if no session available (they typed in the url)
 	$UserRow = query("SELECT * FROM users WHERE username = :username",
 			   array('username' => $_SESSION['CurrentUser']),
 			   $conn);	
 	$id = $UserRow[0]["id"];
-	
 	$rem_date = date('Y-m-d H:i:s',time()-(7*86400));
-
 	$scores = query("SELECT * FROM scores WHERE userid = :id",
 			  array('id' => $id),
 			  $conn);
@@ -73,11 +70,7 @@
 		}
 		return $problem_Words;
 	}
-
-
-	$conn = connect($config);
-
-			
+	$conn = connect($config);			
 	//have to pass in array because query expects 3 things
 	$correct = query("SELECT * FROM scores WHERE correct = :right",
 					  array('right' => 1),

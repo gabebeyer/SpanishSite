@@ -17,10 +17,18 @@
         <input type="text" id="inputUsername" class="form-control" placeholder="username" name = 'username' required autofocus>
         <label for="inputPassword" class="sr-only">password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="password" name = 'password' required>
-       <button class="btn btn-lg btn-primary btn-block" type="submit"> register </button>
+          <div style="padding:10  10">
+            <select type="text" class="form-control"  name = 'period' >
+              <option>Period 1</option>
+              <option>Period 2</option>
+              <option>Period 3</option>
+              <option>Period 4</option>
+              <option>Period 5</option>
+            </select>
+          </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit"> register </button>
       </form>
-
     </div> <!-- /container -->
-
 </body>
 </html>

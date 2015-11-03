@@ -10,6 +10,7 @@
 
 	$username = $_POST['username'];	
 	$password = $_POST['password'];
+	$period = $_POST['period'];
 
 	if ($username && $password) {		
 
@@ -25,9 +26,10 @@
            		</script>";
 		}else{
 
-			$row = insertquery("INSERT INTO users (id,username,password) VALUES (NULL,:username,:password);" , 
-			array('username' => $username, 'password' => $password), 
+			$row = insertquery("INSERT INTO users (id,username,password,period) VALUES (NULL,:username,:password, :period);" , 
+			array('username' => $username, 'password' => $password, 'period' => $period), 
 			$conn);
+			
 			$_SESSION['CurrentUser'] = $username;		
 			header('Location: ./index.php');    	
 		}
