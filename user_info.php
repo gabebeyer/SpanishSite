@@ -74,6 +74,18 @@
 		return $problem_Words;
 	}
 
+
+	$conn = connect($config);
+
+			
+	//have to pass in array because query expects 3 things
+	$correct = query("SELECT * FROM scores WHERE correct = :right",
+					  array('right' => 1),
+					  $conn);
+	$correctTotal = 0;
+	foreach ($correct as $key) {
+		$correctTotal += 1;
+	}
 ?>
 
 <?php require("html_imports.php"); ?>
@@ -108,8 +120,6 @@
 						    				$link = "<a href='http://www.wordreference.com/es/translation.asp?tranword=$search_word'>$word</a>";
 						    		
 						    				echo "<li class='list-group-item'> $link </li>";	
-						    			}else{
-						    				die();
 						    			}
 										$counter += 1;
 								}
@@ -118,7 +128,7 @@
 						  </ul>
 					</div>
 				</div>
-
+				
 				<div class="col-md-6">
 					<div class="panel panel-danger">
 					  <!-- Default panel contents -->
@@ -139,8 +149,6 @@
 							    			$link = "<a href='http://www.wordreference.com/es/translation.asp?tranword=$search_word'>$word</a>";
 							    		
 							    			echo "<li class='list-group-item'> $link </li>";	
-							    		}else{
-							    			die();
 							    		}
 										$counter += 1;
 									}
@@ -151,7 +159,31 @@
 				</div>
 			</div>
 		</div>
+
+	<!-- End of words you know/dont -->
 	</body>
+
+	<footer>
+		<div class="row">
+			<div style="padding:25 150px">
+				<div class="progress">
+				  <div class="progress-bar" 
+				  		role="progressbar" 
+				  		aria-valuenow="<?php echo $correctTotal; ?>" 
+				  		aria-valuemin="0" 
+				  		aria-valuemax="100" 
+				  		style="width: <?php echo $correctTotal; ?>%;" 
+				  		style="min-width: 2em; width: 2%;">
+						<?php echo $correctTotal; ?>%				     
+				    <span class="sr-only"><?php echo $correctTotal; ?>% Complete</span>
+				  </div>
+				</div>
+			</div>
+		</div>
+
+	</footer>
+	
+
 </html>
 
 
