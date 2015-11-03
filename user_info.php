@@ -7,12 +7,28 @@
 	//in order for you to "know" the word
 	$WRONG_AMOUNT = 3;
 	$RIGHT_AMOUNT = 3;
+	$CLASS_REWARD = 100;
+
 	//no need to check if user is logged in, gets here from names link only (navbar)
 	//will error if no session available (they typed in the url)
 	$UserRow = query("SELECT * FROM users WHERE username = :username",
 			   array('username' => $_SESSION['CurrentUser']),
 			   $conn);	
-	$id = $UserRow[0]["id"];
+
+
+
+	$id = strval($UserRow[0]["id"]);
+	
+	$period_id = $UserRow[0]["period"];
+
+
+	$classmates = [];
+	foreach ( query("SELECT * FROM users WHERE period = :period", array('period' => $period_id),$conn) as $key) {
+		array_push($classmates, $key['id']);
+	}
+
+
+
 	$rem_date = date('Y-m-d H:i:s',time()-(7*86400));
 	$scores = query("SELECT * FROM scores WHERE userid = :id",
 			  array('id' => $id),
@@ -70,15 +86,30 @@
 		}
 		return $problem_Words;
 	}
-	$conn = connect($config);			
-	//have to pass in array because query expects 3 things
 	$correct = query("SELECT * FROM scores WHERE correct = :right",
 					  array('right' => 1),
 					  $conn);
+
 	$correctTotal = 0;
 	foreach ($correct as $key) {
-		$correctTotal += 1;
-	}
+		if ($correctTotal < $CLASS_REWARD && in_array( strval($key["userid"]) , $classmates))  {
+			$correctTotal += 1;
+		}else{
+			//in this case they have "Won"
+			try {
+				mail("beyergabe@gmail.com", 	$period_id . "has won", $period_id . "has won a reward! they scored " . $CLASS_REWARD . " points");
+			} catch (Exception $e) {
+				echo "congrates! notify teacher that you won";
+			}
+			$correctTotal = 0;
+			break;
+		}
+	}   
+
+
+	$percentComplete = ($correctTotal/$CLASS_REWARD) * 100;
+
+
 ?>
 
 <?php require("html_imports.php"); ?>
@@ -159,18 +190,14 @@
 	<footer>
 		<div class="row">
 			<div style="padding:25 150px">
+				
 				<div class="progress">
-				  <div class="progress-bar" 
-				  		role="progressbar" 
-				  		aria-valuenow="<?php echo $correctTotal; ?>" 
-				  		aria-valuemin="0" 
-				  		aria-valuemax="100" 
-				  		style="width: <?php echo $correctTotal; ?>%;" 
-				  		style="min-width: 2em; width: 2%;">
-						<?php echo $correctTotal; ?>%				     
-				    <span class="sr-only"><?php echo $correctTotal; ?>% Complete</span>
+				  <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $correctTotal; ?>"
+				  	aria-valuemin="0" aria-valuemax="<?php echo $CLASS_REWARD;?>" style= "width: <?php echo $percentComplete;?>%">
+				    	<span class="sr-only"><?php echo $correctTotal; ?>% Complete</span>
 				  </div>
 				</div>
+			
 			</div>
 		</div>
 

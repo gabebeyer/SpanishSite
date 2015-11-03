@@ -18,14 +18,7 @@
           <label for="inputPassword" class="sr-only">password</label>
           <input type="password" id="inputPassword" class="form-control" placeholder="password" name = 'password' required>
          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        
-        <select type="text" class="form-control"  name = 'period' >
-          <option>Period 1</option>
-          <option>Period 2</option>
-          <option>Period 3</option>
-          <option>Period 4</option>
-          <option>Period 5</option>
-        </select>
+
      
       </form>
     </div> <!-- /container -->
