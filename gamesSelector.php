@@ -6,13 +6,13 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<div class="row">
-<div style="padding:0 120px">
-  <div class="col-xs-6 col-md-3">
-     <div class="thumbnail">
-        <img src="http://www.theinteriorgallery.com/category_images/safariweb.jpg" alt="...">
+<div class="row ">
+<div style="padding:0 120px;">
+  <div class="col-xs-6 col-md-3 ">
+     <div class="thumbnail" >
+        <img src="http://d3ui957tjb5bqd.cloudfront.net/images/screenshots/products/28/280/280622/1410.m00.i104.n034.p.c25.flat-animal-icons-f.jpg" height="200" width="200">
         <div class="caption">
-          <h3>Los Animales!</h3>
+          <h3>Los Animales!</h3> 
           <p> Learn the names of the animals in Spanish.</p>
             <div class="dropdown">
             <button style="width: 100%;" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -32,7 +32,7 @@
 
   <div class="col-xs-6 col-md-3">
      <div class="thumbnail">
-        <img src="http://previewcf.turbosquid.com/Preview/2014/07/11__02_10_02/Classroom_1.jpgabf0560d-a851-42a0-8458-8bc4f118bbaeRes200.jpg" alt="...">
+        <img src="https://d3ui957tjb5bqd.cloudfront.net/images/screenshots/products/2/24/24006/teacher_in_front_of_class_1160x772-o.jpg?1379196866">
         <div class="caption">
           <h3>La sala de clase</h3>
           <p>It is important to know the classroom objects.</p>
@@ -42,10 +42,10 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a href="#">Flash Cards</a></li>
-              <li><a href="#">Multiple Choice</a></li>
-              <li><a href="#">Elimination</a></li>
-              <li><a href="#">Matching</a></li>
+              <li><a href="saladclase/flashcards.php">Flash Cards</a></li>
+              <li><a href="saladclase/choice.php">Multiple Choice</a></li>
+              <li><a href="saladclase/elimination.php">Elimination</a></li>
+              <li><a href="saladclase/concentration.php">Matching</a></li>
             </ul>
         </div>
         </div>
@@ -54,7 +54,7 @@
 
   <div class="col-xs-6 col-md-3">
      <div class="thumbnail">
-        <img src="http://www.williamruchdc.com/files/cache/d9e817cdd2a56273bb38b2c8397e7eb1_f11.jpg" alt="...">
+        <img src="http://4vector.com/i/free-vector-lungs-and-human-body_133271_Lungs_and_human_body.jpg" height="200" width="200" alt="...">
         <div class="caption">
           <h3>El cuerpo humano</h3>
           <p>You need to be able to talk about your body.</p>
@@ -64,10 +64,10 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a href="#">Flash Cards</a></li>
-              <li><a href="#">Multiple Choice</a></li>
-              <li><a href="#">Elimination</a></li>
-              <li><a href="#">Matching</a></li>
+              <li><a href="cuerpo/flashcards.php">Flash Cards</a></li>
+              <li><a href="cuerpo/choice.php">Multiple Choice</a></li>
+              <li><a href="cuerpo/elimination.php">Elimination</a></li>
+              <li><a href="cuerpo/concentration.php">Matching</a></li>
             </ul>
         </div>
         </div>
@@ -76,7 +76,7 @@
 
   <div class="col-xs-6 col-md-3">
      <div class="thumbnail">
-        <img src="https://media4.giphy.com/media/3JgtnXdRhSflK/200_s.gif" alt="...">
+        <img src="http://mizzoumagarchives.missouri.edu/2010-Spring/features/quintessential/images/feat-Quint-food-is.jpg" alt="..." >
         <div class="caption">
           <h3>Los Comidas</h3>
           <p>It is fun to be able to talk about food.</p>  
@@ -86,10 +86,10 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a href="#">Flash Cards</a></li>
-              <li><a href="#">Multiple Choice</a></li>
-              <li><a href="#">Elimination</a></li>
-              <li><a href="#">Matching</a></li>
+              <li><a href="comidas/flashcards.php">Flash Cards</a></li>
+              <li><a href="comidas/choice.php">Multiple Choice</a></li>
+              <li><a href="comidas/elimination.php">Elimination</a></li>
+              <li><a href="comidas/concentration.php">Matching</a></li>
             </ul>
         </div>
         </div>

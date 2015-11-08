@@ -15,7 +15,6 @@
 			   array('username' => $_SESSION['CurrentUser']),
 			   $conn);	
 
-
 	//the id of the current user
 	$id = strval($UserRow[0]["id"]);
 	$period_id = $UserRow[0]["period"];
@@ -27,22 +26,21 @@
 		array_push($classmates, $key['id']);
 	}
 
-
 	//here we start to generate a list of words 
 	// 2 lists of "Known" and "unkown" words
 	//defined as amount of right/wrong awnsers on a word in past x weeks 
 
 	//how long we want to go back
-	//basicly any thing before this date is not even considered at all
+	//any thing before this date is not even considered at all
 	$rem_date = date('Y-m-d H:i:s',time()-(7*86400));
 		
 	//scores is a table with score_id userid word correct and a timestamp
-	//basicly stores all awnsers ever on the site
+	//stores all awnsers ever on the site
 	$scores = query("SELECT * FROM scores WHERE userid = :id",
 			  array('id' => $id),
 			  $conn);
 	
-	//list of ALL right/wrong words from last 2 weeks
+	//list of all right/wrong words from last 2 weeks
 	$wrongWords = array();
 	$rightWords = array();
 	if ($scores) {
@@ -53,9 +51,10 @@
 			$correct = intval($score["correct"]);
 			//sort it into to lists of right and wrong words.
 			//i like lists man idk i use them alot
-			if ($correct == 1 && $timestamp >= $rem_date) {
+			//if ($correct == 1 && $timestamp >= $rem_date) {
+			if ($correct == 1) {
 				array_push($rightWords, $word);
-			}elseif ($correct == 0 && $timestamp >= $rem_date) {
+			}elseif ($correct == 0) {
 				array_push($wrongWords, $word);# code...
 			}else{
 			}
@@ -90,28 +89,29 @@
 		return $problem_Words;
 	}
 
-	$correct = query("SELECT * FROM scores WHERE correct = :right",
-					  array('right' => 1),
+
+
+
+	$correct_awnsers = query("SELECT * FROM scores WHERE correct = :true AND cashedIn = :false",
+					  array('true'  =>  1 ,
+					  		'false' =>  0),
 					  $conn);
-	
 	$correctTotal = 0;
-	foreach ($correct as $key) {
+	foreach ($correct_awnsers as $key) {
+		$score_id = $key['score_id'];
 		if ($correctTotal < $CLASS_REWARD && in_array( strval($key["userid"]) , $classmates))  {
 			$correctTotal += 1;
 		}else{
-			//in this case they have "Won"
-			//This will probably require some changes after the site is online 
-			//hard to test on my computer mail is broken on localhost 
-			try {
-				mail("beyergabe@gmail.com", 	$period_id . "has won", $period_id . "has won a reward! they scored " . $CLASS_REWARD . " points");
-			} catch (Exception $e) {
-				echo "congrates! notify teacher that you won";
+			foreach ($correct_awnsers as $key) {
+				$updater = insertquery("UPDATE scores SET cashedIn = '1' WHERE score_id = :scoreid;",
+							array('scoreid' => $score_id ),
+							$conn);
 			}
 			$correctTotal = 0;
-			break;
 		}
 	}   
 	$percentComplete = ($correctTotal/$CLASS_REWARD) * 100;
+
 ?>
 
 <?php require("html_imports.php"); ?>
@@ -130,10 +130,11 @@
 						  <ul class="list-group">
 						    <?php 
 						    	$counter = 0;
-						    	if (empty($rightWords)) {
+						    	$knownWordsComputed = knownWords($rightWords,$RIGHT_AMOUNT);
+						    	if (empty($knownWordsComputed)) {
 						    		echo "<li class='list-group-item'> Sorry you have no recent words </li>";
 						    	} else {
-									foreach (knownWords($rightWords,$RIGHT_AMOUNT) as $word) {
+									foreach ($knownWordsComputed as $word) {
 						    			if ($counter <= 5) {					    				
 						    				//michael bay of code rn
 						    				$pieces = explode(" ", $word);
@@ -154,10 +155,11 @@
 						  <ul class="list-group">
 						    <?php 
 						    	$counter = 0;
+						    	$problemWordsComputed = problemWords($wrongWords,$WRONG_AMOUNT);
 						    	if (empty($wrongWords)){
 						    		echo "<li class='list-group-item'> Sorry you have no recent words </li>";
 						    	}else{
-							    	foreach (problemWords($wrongWords,$WRONG_AMOUNT) as $word) {
+							    	foreach ($problemWordsComputed as $word) {
 							    		if ($counter < 5) {
 							    			$pieces = explode(" ", $word);
 											$search_word = implode(" ",array_slice($pieces, 1));
@@ -173,10 +175,8 @@
 				</div>
 			</div>
 		</div>
-
 	<!-- End of words you know/dont -->
 	</body>
-
 	<footer>
 		<div class="row">
 			<div style="padding:25 150px">				
