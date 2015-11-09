@@ -92,16 +92,20 @@
 
 
 
+
 	$correct_awnsers = query("SELECT * FROM scores WHERE correct = :true AND cashedIn = :false",
 					  array('true'  =>  1 ,
 					  		'false' =>  0),
 					  $conn);
-	$correctTotal = 0;
+	
+
+	$correctTotal = 0; //<-- right awensers from users classmates
 	foreach ($correct_awnsers as $key) {
 		$score_id = $key['score_id'];
+		//if we havnt reached the goal, and the score comes from a classmate
 		if ($correctTotal < $CLASS_REWARD && in_array( strval($key["userid"]) , $classmates))  {
 			$correctTotal += 1;
-		}else{
+		}elseif ($correctTotal >= $CLASS_REWARD && in_array( strval($key["userid"]) , $classmates)) {
 			foreach ($correct_awnsers as $key) {
 				$updater = insertquery("UPDATE scores SET cashedIn = '1' WHERE score_id = :scoreid;",
 							array('scoreid' => $score_id ),

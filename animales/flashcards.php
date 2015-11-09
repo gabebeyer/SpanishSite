@@ -201,7 +201,6 @@ function init(){
     	}
        	interval=setInterval(draw,100);
 };
-
  </script>  
   </head>
   <body onLoad="init();">
