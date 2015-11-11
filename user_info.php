@@ -5,9 +5,9 @@
 
 	//used to define how many times you must get a word right/wrong
 	//in order for you to "know" the word
-	$WRONG_AMOUNT = 3;
+	$WRONG_AMOUNT = 5;
 	$RIGHT_AMOUNT = 3;
-	$CLASS_REWARD = 100;
+	$CLASS_REWARD = 10;
 
 	//no need to check if user is logged in, gets here from names link only (navbar)
 	//will error if no session available (they typed in the url)
@@ -105,7 +105,8 @@
 		//if we havnt reached the goal, and the score comes from a classmate
 		if ($correctTotal < $CLASS_REWARD && in_array( strval($key["userid"]) , $classmates))  {
 			$correctTotal += 1;
-		}elseif ($correctTotal >= $CLASS_REWARD && in_array( strval($key["userid"]) , $classmates)) {
+		}elseif ($correctTotal >= $CLASS_REWARD && 
+			in_array( strval($key["userid"]) , $classmates)) {
 			foreach ($correct_awnsers as $key) {
 				$updater = insertquery("UPDATE scores SET cashedIn = '1' WHERE score_id = :scoreid;",
 							array('scoreid' => $score_id ),
@@ -115,7 +116,6 @@
 		}
 	}   
 	$percentComplete = ($correctTotal/$CLASS_REWARD) * 100;
-
 ?>
 
 <?php require("html_imports.php"); ?>
@@ -185,7 +185,7 @@
 		<div class="row">
 			<div style="padding:25 150px">				
 				<div class="progress">
-				  <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $correctTotal; ?>"
+				  <div class="progress-bar" role="progressbar" aria-valuenow=" <?php echo $percentComplete;?>"
 				  	aria-valuemin="0" aria-valuemax="<?php echo $CLASS_REWARD;?>" style= "width: <?php echo $percentComplete;?>%">
 				    	<span class="sr-only"><?php echo $correctTotal; ?>% Complete</span>
 				  </div>

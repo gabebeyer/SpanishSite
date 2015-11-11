@@ -14,7 +14,10 @@ function connect($config){
 		//Dev only. Shows all PDO errors
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+		//comment
 		return $conn;
+
+
 		
 	} catch (exeption $e) {
 		return false;
