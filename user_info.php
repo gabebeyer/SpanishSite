@@ -89,33 +89,27 @@
 		return $problem_Words;
 	}
 
+	$initial = query("SELECT * FROM scores WHERE correct = 1 AND cashedIn = 0",
+			   				array(),
+			   				$conn);	
+	$totalToCount = 0;
+	foreach ($initial as $score) {
+		if (in_array( strval($score["userid"]) , $classmates)) {
+			$totalToCount+=1;
+		} 
+	}
 
 
+	
+	if ($totalToCount > $CLASS_REWARD) {
 
-
-	$correct_awnsers = query("SELECT * FROM scores WHERE correct = :true AND cashedIn = :false",
-					  array('true'  =>  1 ,
-					  		'false' =>  0),
-					  $conn);
+	} else {
+		
+	}
+	
 	
 
-	$correctTotal = 0; //<-- right awensers from users classmates
-	foreach ($correct_awnsers as $key) {
-		$score_id = $key['score_id'];
-		//if we havnt reached the goal, and the score comes from a classmate
-		if ($correctTotal < $CLASS_REWARD && in_array( strval($key["userid"]) , $classmates))  {
-			$correctTotal += 1;
-		}elseif ($correctTotal >= $CLASS_REWARD && 
-			in_array( strval($key["userid"]) , $classmates)) {
-			foreach ($correct_awnsers as $key) {
-				$updater = insertquery("UPDATE scores SET cashedIn = '1' WHERE score_id = :scoreid;",
-							array('scoreid' => $score_id ),
-							$conn);
-			}
-			$correctTotal = 0;
-		}
-	}   
-	$percentComplete = ($correctTotal/$CLASS_REWARD) * 100;
+
 ?>
 
 <?php require("html_imports.php"); ?>
@@ -185,8 +179,7 @@
 		<div class="row">
 			<div style="padding:25 150px">				
 				<div class="progress">
-				  <div class="progress-bar" role="progressbar" aria-valuenow=" <?php echo $percentComplete;?>"
-				  	aria-valuemin="0" aria-valuemax="<?php echo $CLASS_REWARD;?>" style= "width: <?php echo $percentComplete;?>%">
+				  <div class="progress-bar" role="progressbar" style= "width: <?php echo $totalToCount;?>%">
 				    	<span class="sr-only"><?php echo $correctTotal; ?>% Complete</span>
 				  </div>
 				</div>
