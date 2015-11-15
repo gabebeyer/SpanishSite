@@ -107,7 +107,6 @@
 	//if the total is greater then our goal
 	if ($totalToCount > $CLASS_REWARD) {
 		//loop through correct unchashed awnsers
-		try {
 			foreach ($initial as $score) {
 			//if awnser is from a classmate
 			if (in_array( strval($score["userid"]) , $classmates) ) {
@@ -117,11 +116,11 @@
 							$conn);
 			}
 		}
+
+		//neesds to be updated
+		mail("SET TO ELLES EMAIL","subject", "the class $period_id has scored");
 		//then refresh page
 		header("Refresh:0");
-		} catch (Exception $e) {
-			echo "there are no scores recorded";
-		}
 	}
 	$percenetComplete =  ($totalToCount/$CLASS_REWARD) * 100;
 
