@@ -7,7 +7,7 @@
 	//in order for you to "know" the word
 	$WRONG_AMOUNT = 5;
 	$RIGHT_AMOUNT = 3;
-	$CLASS_REWARD = 10;
+	$CLASS_REWARD = 5;
 
 	//no need to check if user is logged in, gets here from names link only (navbar)
 	//will error if no session available (they typed in the url)
@@ -93,21 +93,37 @@
 			   				array(),
 			   				$conn);	
 	$totalToCount = 0;
-	foreach ($initial as $score) {
+
+
+	if (!empty($initial)) {
+		foreach ($initial as $score) {
 		if (in_array( strval($score["userid"]) , $classmates)) {
 			$totalToCount+=1;
 		} 
 	}
-
-
 	
-	if ($totalToCount > $CLASS_REWARD) {
-
-	} else {
-		
 	}
 	
-	
+	//if the total is greater then our goal
+	if ($totalToCount > $CLASS_REWARD) {
+		//loop through correct unchashed awnsers
+		try {
+			foreach ($initial as $score) {
+			//if awnser is from a classmate
+			if (in_array( strval($score["userid"]) , $classmates) ) {
+				//set score as cashed
+				$updater = insertquery("UPDATE scores SET cashedIn = '1' WHERE score_id = :scoreid;",
+							array('scoreid' => $score["score_id"] ),
+							$conn);
+			}
+		}
+		//then refresh page
+		header("Refresh:0");
+		} catch (Exception $e) {
+			echo "there are no scores recorded";
+		}
+	}
+	$percenetComplete =  ($totalToCount/$CLASS_REWARD) * 100;
 
 
 ?>
@@ -179,8 +195,8 @@
 		<div class="row">
 			<div style="padding:25 150px">				
 				<div class="progress">
-				  <div class="progress-bar" role="progressbar" style= "width: <?php echo $totalToCount;?>%">
-				    	<span class="sr-only"><?php echo $correctTotal; ?>% Complete</span>
+				  <div class="progress-bar" role="progressbar" style= "width: <?php echo $percenetComplete ;?>%">
+				    	<span class="sr-only"><?php echo $correctTotal; ?>% complete</span>
 				  </div>
 				</div>
 			</div>
