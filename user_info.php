@@ -112,7 +112,7 @@
 			//if awnser is from a classmate
 			if (in_array( strval($score["userid"]) , $classmates) ) {
 				//set score as cashed
-				$updater = insertquery("UPDATE scores SET cashedIn = '1' WHERE score_id = :scoreid;",
+				$updater = insertquery("UPDATE scores SET cashedIn = 1 WHERE score_id = :scoreid;",
 							array('scoreid' => $score["score_id"] ),
 							$conn);
 			}
