@@ -123,8 +123,6 @@
 		header("Refresh:0");
 	}
 	$percenetComplete =  ($totalToCount/$CLASS_REWARD) * 100;
-
-
 ?>
 
 <?php require("html_imports.php"); ?>

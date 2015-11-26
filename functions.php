@@ -17,7 +17,6 @@ function connect($config){
 		//comment
 		return $conn;
 
-
 	} catch (exeption $e) {
 		return false;
 	}
